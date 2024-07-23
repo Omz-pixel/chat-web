@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Test</title>
+    <!-- <script src="http://192.168.100.206:9000/socket.io/socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+</head>
+<body>
+    <h1 id="uname"></h1>
+    <form>
+        <input type="text" name="message" id="mssg">&nbsp;&nbsp;
+        <button onclick="send()">SEND</button><br><br>
+        <b>Send to: </b><select name="opt" id="users"></select>&nbsp;&nbsp;
+        <!-- <button onclick="get_details()">DETAILS</button><br><br> -->
+        <p id="display"></p>
+    </form>
+
+    <script>
+        var uname = "";
+        var online_users = [];
+        var n = 0;
+        var found = false;
+
+
+        let sending;
+        
+        document.getElementById("uname").textContent = uname;
+
+        // const socket = io('http://192.168.100.206:9000');
+        const socket = io('http://localhost:9000');
+        let display = document.getElementById("display");
+        let online = document.getElementById("users")
+
+        socket.on('connect', () => {
+            console.log("Successfully connected to the server. ", uname);
+        });
+
+        // function get_details(){
+        //     socket.emit('rqd', 'details')
+        // }
+
+        socket.on('given', (data) => {
+            console.log("something");
+            if(uname == ""){
+                uname = data;
+                socket.emit('uname', uname);
+            }
+            console.log(uname)
+        })
+            
+
+        
+
+        socket.on('online', (users) => {
+            if(uname == users) found = true;
+            for(let i=0; i<online_users.length; i++){
+                if(online_users[i] == users){
+                    found = true;
+                }
+            }
+            
+
+            if(!found){
+                online_users.push(users);
+                
+                const option = document.createElement("option");
+                option.value = users;
+                option.id = users.toLocaleLowerCase();
+                option.textContent = users.toUpperCase();
+
+                online.append(option);
+            }else{
+                // const back = document.getElementById(users.toLowerCase());
+                // if(back.disabled == true) back.disabled = false;
+                console.log("User already online/back online: ", users);
+                found = false;
+            }
+            // online.innerHTML += `<option value='${users}'>${users.toUpperCase()}</option>`;
+        });
+
+        socket.on('new_mssg', (data) => {
+            const { sender, receiver, mssg } = data;
+            if(uname.toLocaleLowerCase() == receiver || uname.toLocaleLowerCase() == sender){
+                console.log("Message received.", mssg);
+                display.innerHTML += `<b> ${mssg} </b><br><br>`;
+            }else console.log("Message blocked!!");
+        });
+
+        function send(){
+            let mssg = document.getElementById("mssg").value;
+            sending = uname.toLowerCase() + "-> " + mssg;
+            const data = {
+                "sender": uname.toLowerCase(),
+                "receiver": online.value.toLowerCase(),
+                "mssg": sending
+            }
+            console.log("It works: ", mssg);
+            socket.emit('send_mssg', data);
+            
+            mssg = '';
+            event.preventDefault();
+        }
+
+        // socket.on("who_left", (data) => {
+        //     socket.emit("not_me", uname)
+        // })
+
+        socket.on("bye", (data) => {
+            for (let z=0; z<online.children.length; z++) {
+                if(data == online.children[z].value){
+                    delete online.children[z];
+                    console.log("User: ", data, "deleted succesfully")
+                }
+                console.log(online.children[0].value);
+                
+            }
+            
+            
+        })
+        // get_details();
+    </script>
+</body>
+</html>
