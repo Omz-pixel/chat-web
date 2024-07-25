@@ -70,13 +70,20 @@ a:hover {
     display: flex;
     flex-direction: column;
     width: 14.4vw;
-    margin-left: 25vw;
-    margin-top: -37vh;
+    margin-top: -2vw;
 }
 
 
 .move_center{
-    margin-left: 23vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40vw;
+    margin: auto;
+}
+
+p.bottom{
+    margin-left: 50vw;
 }
 
 .form2 p{
