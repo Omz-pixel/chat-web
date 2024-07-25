@@ -1,0 +1,73 @@
+*{
+     margin: 0;
+     padding: 0;
+}
+/* body{
+     overflow: hidden;
+} */
+.navigation{
+     position: fixed;
+     z-index: 100;
+     top: 0;
+     left: 0;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 2vh 2vw 2vh 2vw;
+     background-image: linear-gradient(90deg, #A6755A, #CCA286);
+     width: 98vw;
+}
+.logo{
+     width: 110px;
+     height: 100px;
+     border-radius: 50%;
+     border: 2px solid #A0724A;
+     box-shadow: 0px 0px 10px 10px #533829;
+}
+.menu{
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     width: 25vw;
+     padding-right: 5vw;
+}
+.menu a{
+     text-decoration: none;
+     background-color: #A47352;
+     padding: 2% 5%;
+     color: black;
+     font-weight: bold;
+     font-size: 20pt;
+     border-radius: 20px;
+}
+.container{
+     width: 300%;
+     overflow: hidden;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.pic1{
+     width: 100vw;
+     height: 70vh;
+     background-image: url("pics/home1.jpg");
+     background-size: cover;
+     background-position: center;
+     padding: 10vw;
+}
+.pic2{
+     width: 100vw;
+     height: 70vh;
+     background-image: url("pics/home2.jpg");
+     background-size: cover;
+     background-position: center;
+     padding: 10vw;
+}
+.pic3{
+     width: 100vw;
+     height: 70vh;
+     background-image: url("pics/home3.jpg");
+     background-size: cover;
+     background-position: center;
+     padding: 10vw;
+}
