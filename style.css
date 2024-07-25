@@ -12,13 +12,14 @@ body, html {
     transition: background-image 1s ease-in-out;
 }
 
-.blur {
-    width: 100%;
-    height: 100%;
-    min-width: 100%;
-    min-height: 100%;
-    background-color: #1a426d00;
+a {
+    /* text-decoration: none; */
+    color: #2F5597;
+    transition: 1s ease;
+}
 
+a:hover {
+    color: purple;
 }
 
 .container {
@@ -28,43 +29,109 @@ body, html {
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
-    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); */
     display: flex;
     background-color: #1a426d00;
+    transition: width 1s ease-in-out;
 }
 
 .background {
     width: 53%;
     height: 100%;
-    background-image: url('pics/pic1.jpeg'); /* First image */
+    background-image: url('pics/pic1.jpeg');
     background-size: cover;
     background-position: center;
     transition: background-image 1s ease-in-out;
     border-radius: 40px;
-    /* box-shadow: 0 0 35px rgba(0, 0, 0, 0.466); */
 }
-
 
 .form-container {
     width: 50%;
-    /* padding: 20px; */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     background-color: #1a426d00;
+    position: relative;
+}
+.form2 {
+    /* margin: auto; */
+    margin-left: 0px;
+    border-radius: 35px;
+    display: block;
+    padding: 20px;
+    align-content: flex-start;
+    /* flex-direction: column; */
+    background-color: #DBAD92;
+    font-family: Candara;
+    width: 100%;
+    max-width: 87vw;
 }
 
+.right{
+    display: flex;
+    flex-direction: column;
+    width: 14.4vw;
+    margin-left: 25vw;
+    margin-top: -37vh;
+}
+
+
+.move_center{
+    margin-left: 23vw;
+}
+
+.form2 p{
+    margin-top: 8vh;
+    margin-left: 10vw;
+}
+
+.form2 h2 {
+    margin-bottom: 20px;
+}
+
+.form2 label {
+    margin-top: 10px;
+}
+
+.form2 input {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 2px solid #283a52;
+    border-radius: 5px;
+}
+
+.form2 button {
+    padding: 10px;
+    background: #333F50;
+    color: #fff;
+    font-size: 11pt;
+    font-weight: 500;
+    width: 92px;
+    border: 2px solid #172231;
+    margin-top: 3vh;
+    margin-left: 3vw;
+    border-radius: 17px;
+    transition: 1s ease;
+    cursor: pointer;
+}
+
+.form2 button:hover {
+    background: #0056b3;
+    font-weight: 700;
+}
+
+
 .form {
-    /* margin-top: 15%; */
-    /* margin-left: 10vw; */
+    margin: auto;
     border-radius: 35px;
     display: flex;
     padding: 20px;
     flex-direction: column;
     background-color: #E7D9CF;
+    /* align-items: center; */
     font-family: Candara;
-    transition: 3s ease-in-out;
-    width: auto;
+    width: 100%;
+    max-width: 323px;
 }
 
 .form h2 {
@@ -90,7 +157,6 @@ body, html {
     border: 2px solid #172231;
     border-radius: 5px;
     transition: 1s ease;
-    /* font-weight: 100; */
     cursor: pointer;
 }
 
@@ -99,37 +165,40 @@ body, html {
     font-weight: 700;
 }
 
-.form2{
-    width: 100%;
-    height: 91%;
-    margin: auto;
-    margin-left: 23.5%;
-}
-
 .hidden {
-    display: none;
-    transition: 3s ease-in-out;
+    transform: translateX(100%);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: transform 1s ease, opacity 1s ease;
 }
 
-.log{
-    padding: 2%;
-    margin-top: 8%;
+.visible {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 1s ease, opacity 1s ease;
+}
+
+.log {
+    padding: 1%;
+    margin-top: 5%;
     margin-left: 10vw;
     border-radius: 20px;
-    display: flex;
     flex-direction: column;
-    background-color: #E7D9CF;
-    transition: 3s ease-in-out;
-    background-color: #0057b300;
+    background-color: rgba(255, 0, 0, 0);
     border: 10px solid #E7D9CF;
     border-radius: 40px;
-    width: 25vw;
+    width: auto;
 }
 
-/* #login-form {
-    display: flex;
+.log2 {
+    padding: 2%;
+    margin: auto;
+    border-radius: 20px;
+    flex-direction: column;
+    background-color: #e7d9cf00;
+    border: 10px solid #DBAD92;
+    border-radius: 40px;
+    width: 90vw;
+    height: auto;
 }
-
-#signup-form {
-    display: flex;
-} */

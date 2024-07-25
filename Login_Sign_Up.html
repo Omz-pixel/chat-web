@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="body_background">
-    <!-- <div class="blur"> -->
-        <div class="container">
-            <div class="background" id="background"></div>
-            <div class="form-container" id="form-container">
-                <div class="log">
+    <div class="container" id="container">
+        <div class="background" id="background"></div>
+        <div class="form-container" id="form-container">
+            <!-- <div class="login"> -->
+                
+                <div class="log" id="log-form">
                     <form id="login-form" class="form" action="http://localhost:4000/add.php" method="post">
                         <h2>Login to your account</h2>
                         <label for="username">Username:</label>
@@ -19,28 +20,36 @@
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" placeholder="Enter your password">
                         <button>SUBMIT</button>
-                        <p>If you have no account, <a href="#" id="signup-link" onclick="sign_up()">sign up here</a></p>
+                        <p>If you have no account, <a href="#" id="signup-link" onclick="sign_up(event)">sign up here</a></p>
                     </form>
                 </div>
-                <form id="signup-form" class="form hidden form2">
-                    <h2>Create your account</h2>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email">
-                    <label for="username-signup">Username:</label>
-                    <input type="text" id="username-signup" name="username-signup" placeholder="Enter your username">
-                    <label for="password-signup">Password:</label>
-                    <input type="password" id="password-signup" name="password-signup" placeholder="Enter your password">
-                    <label for="confirm-password">Confirm your Password:</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
-                    <label>
-                        <input type="checkbox" name="terms"> Click this if you've read the <a href="#">terms and agreements</a>
-                    </label>
-                    <button type="submit">SUBMIT</button>
-                    <p>If you already have an account, <a href="#" id="login-link" onclick="log_in()">login here</a></p>
-                </form>
+            <!-- </div> -->
+            <div class="log2 hidden" id="log2-form">
+                <!-- <center> -->
+                <form id="signup-form" class="form2">
+                    <center><h2><u>Create your account</u></h2></center>
+                    <div class="move_center">
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email" placeholder="Enter your email"><br>
+                        <label for="username-signup">Username:</label><br>
+                        <input type="text" id="username-signup" name="username-signup" placeholder="Enter your username"><br>
+                        <label for="password-signup">Password:</label><br>
+                        <input type="password" id="password-signup" name="password-signup" placeholder="Enter your password"><br>
+                        <div class="right">
+                            <label for="confirm-password">Confirm your Password:</label>
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
+                            <label>
+                                <input type="checkbox" name="terms"> Click this if you've read the <a href="#">terms and agreements</a>
+                            </label>
+                            <button type="submit">SUBMIT</button>
+                        </div>
+                        <b><p>If you already have an account, <a href="#" id="login-link" onclick="log_in(event)">login here</a></p></b>
+                    </div>
+                    </form>
+                <!-- </center> -->
             </div>
         </div>
-    <!-- </div> -->
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
