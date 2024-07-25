@@ -187,7 +187,7 @@ p.bottom{
 }
 
 .log {
-    padding: 1%;
+    padding: 1vh 0.5vw;
     margin-top: 5%;
     margin-left: 10vw;
     border-radius: 20px;
@@ -196,6 +196,7 @@ p.bottom{
     border: 10px solid #E7D9CF;
     border-radius: 40px;
     width: auto;
+    max-width: 365px;
 }
 
 .log2 {
