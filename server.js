@@ -23,6 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/new-user', (req, res) => {
     console.log(req.body);
     const user_info = req.body;
+    user_info.loggedIn = true;
+    users = user_info.username;
     const filePath = path.join(__dirname, 'users.json');
     fs.readFile(filePath, (err, data) => {
         if (err) {
@@ -35,42 +37,45 @@ app.post('/new-user', (req, res) => {
             if (err) {
                 return res.status(500).json({ message: 'Failed to write file' });
             }
-            res.status(200).json({ message: 'User created successfully' });
+            console.log('User created successfully');
+            const urlUser = user_info.username;
+            res.redirect(`/user?username=${encodeURIComponent(user_info.username)}`);
         });
     });
 });
 
 // Serving the sign-up page
 app.get('/', (req, res) => {
-    const signUpPage = path.join(__dirname, 'Login_Sign_Up.html');
+    const signUpPage = path.join(__dirname, '/html/Login_Sign_Up.html');
+    console.log(req.url)
     res.setHeader('Content-Type', 'text/html');
     fs.readFile(signUpPage, (err, data) => {
         if (err) {
             console.log(err);
             res.status(500).send('Server error');
         } else {
-            res.write(data);
-            res.end();
+            res.end(data);
         }
     });
 });
 
 // Serving the chat page
 app.get('/user', (req, res) => {
-    const parameter = new URLSearchParams(req.url);
-    const user = parameter.get('/user');
-    users = user;
-    console.log(users, user, parameter);
+    // const parameter = new URLSearchParams(req.url);
+    // const user = parameter.get('username');
+    const chatPage = path.join(__dirname, '/html/chat.html');
+    // users = user;
+    console.log(req.url)
+    console.log(users);
     res.setHeader('Content-Type', 'text/html');
 
-    fs.readFile('./chat.html', (err, data) => {
+    fs.readFile(chatPage, (err, data) => {
         if (err) {
             console.log(err);
             res.status(500).send('Server error');
         } else {
             console.log("done");
-            res.write(data);
-            res.end();
+            res.end(data);
         }
     });
 });

@@ -1,1 +1,52 @@
-[]
+[
+    {
+        "email": "coolomar42@gmail.com",
+        "username": "omz",
+        "password": "pass",
+        "confirm-password": "pass",
+        "terms": "on",
+        "loggedIn": true
+    },
+    {
+        "email": "dkd@kjdd",
+        "username": "da gama",
+        "password": "pass",
+        "confirm-password": "pass",
+        "terms": "on",
+        "loggedIn": true
+    },
+    {
+        "email": "coolomar42@gmail.com",
+        "username": "omz",
+        "password": "danzo",
+        "confirm-password": "danzo",
+        "terms": "on",
+        "loggedIn": true
+    },
+    {
+        "email": "example@email.com",
+        "username": "Robert",
+        "password": "woohooo",
+        "confirm-password": "woohoo",
+        "terms": "on",
+        "loggedIn": true
+    },
+    {
+        "email": "coolomar42@gmail.com",
+        "username": "omz",
+        "password": "12345",
+        "confirm-password": "12345",
+        "terms": "on",
+        "loggedIn": true,
+        "sessionId": "9864c9fc-ef43-4407-a9de-e408d3f1b136"
+    },
+    {
+        "email": "dkd@kjdd",
+        "username": "polhendri",
+        "password": "234",
+        "confirm-password": "234",
+        "terms": "on",
+        "loggedIn": true,
+        "sessionId": "9601081a-d114-4893-9a42-f3ef6081219c"
+    }
+]

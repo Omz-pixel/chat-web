@@ -7,7 +7,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../pics/pic1.jpeg');
+    background-image: url('../pics/blur1.png');
     background-size: cover;
     transition: background-image 1s ease-in-out;
 }
@@ -37,7 +37,7 @@ a:hover {
 .background {
     width: 53%;
     height: 100%;
-    background-image: url('pics/pic1.jpeg');
+    background-image: url('../pics/pic1.jpeg');
     background-size: cover;
     background-position: center;
     transition: background-image 1s ease-in-out;
