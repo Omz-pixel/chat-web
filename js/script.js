@@ -3,20 +3,20 @@ const background = document.getElementById('background');
 const container = document.querySelector('.container');
 const logForm = document.getElementById('log-form');
 const log2Form = document.getElementById('log2-form');
-const fixedBackground = 'url("pics/signUp_blur.png")';
+const fixedBackground = 'url("../pics/signUp_blur.png")';
 
 let backgroundInterval;
 
 const backgrounds = [
-    'url("pics/pic1.jpeg")',
-    'url("pics/pic2.jpeg")',
-    'url("pics/pic3.jpeg")'
+    'url("../pics/pic1.jpeg")',
+    'url("../pics/pic2.jpeg")',
+    'url("../pics/pic3.jpeg")'
 ];
 
 const blurBackgrounds = [
-    'url("pics/blur1.png")',
-    'url("pics/blur2.png")',
-    'url("pics/blur3.png")'
+    'url("../pics/blur1.png")',
+    'url("../pics/blur2.png")',
+    'url("../pics/blur3.png")'
 ];
 
 let currentBackgroundIndex = 0;

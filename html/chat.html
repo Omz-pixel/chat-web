@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Test</title>
     <!-- <script src="http://192.168.100.206:9000/socket.io/socket.io.js"></script> -->
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://localhost:9000/socket.io/socket.io.js"></script>
     
 </head>
 <body>
@@ -14,7 +14,6 @@
         <input type="text" name="message" id="mssg">&nbsp;&nbsp;
         <button onclick="send()">SEND</button><br><br>
         <b>Send to: </b><select name="opt" id="users"></select>&nbsp;&nbsp;
-        <!-- <button onclick="get_details()">DETAILS</button><br><br> -->
         <p id="display"></p>
     </form>
 
@@ -37,10 +36,6 @@
         socket.on('connect', () => {
             console.log("Successfully connected to the server. ", uname);
         });
-
-        // function get_details(){
-        //     socket.emit('rqd', 'details')
-        // }
 
         socket.on('given', (data) => {
             console.log("something");
@@ -73,12 +68,9 @@
 
                 online.append(option);
             }else{
-                // const back = document.getElementById(users.toLowerCase());
-                // if(back.disabled == true) back.disabled = false;
                 console.log("User already online/back online: ", users);
                 found = false;
             }
-            // online.innerHTML += `<option value='${users}'>${users.toUpperCase()}</option>`;
         });
 
         socket.on('new_mssg', (data) => {
@@ -104,10 +96,6 @@
             event.preventDefault();
         }
 
-        // socket.on("who_left", (data) => {
-        //     socket.emit("not_me", uname)
-        // })
-
         socket.on("bye", (data) => {
             for (let z=0; z<online.children.length; z++) {
                 if(data == online.children[z].value){
@@ -120,7 +108,6 @@
             
             
         })
-        // get_details();
     </script>
 </body>
 </html>

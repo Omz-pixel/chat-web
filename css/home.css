@@ -50,7 +50,7 @@
 .pic1{
      width: 100vw;
      height: 70vh;
-     background-image: url("pics/home1.jpg");
+     background-image: url("../pics/home1.jpg");
      background-size: cover;
      background-position: center;
      padding: 10vw;
@@ -58,7 +58,7 @@
 .pic2{
      width: 100vw;
      height: 70vh;
-     background-image: url("pics/home2.jpg");
+     background-image: url("../pics/home2.jpg");
      background-size: cover;
      background-position: center;
      padding: 10vw;
@@ -66,7 +66,7 @@
 .pic3{
      width: 100vw;
      height: 70vh;
-     background-image: url("pics/home3.jpg");
+     background-image: url("../pics/home3.jpg");
      background-size: cover;
      background-position: center;
      padding: 10vw;
