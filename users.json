@@ -48,5 +48,19 @@
         "terms": "on",
         "loggedIn": true,
         "sessionId": "9601081a-d114-4893-9a42-f3ef6081219c"
+    },
+    {
+        "email": "gmaph001@gmail.com",
+        "username": "Gmaph001",
+        "password": "SRSS14552",
+        "confirm-password": "SRSS14552",
+        "loggedIn": true
+    },
+    {
+        "email": "coolomar42@gmail.com",
+        "username": "omz",
+        "password": "123456789",
+        "confirm-password": "123456789",
+        "loggedIn": true
     }
 ]

@@ -46,7 +46,7 @@ app.post('/new-user', (req, res) => {
 
 // Serving the sign-up page
 app.get('/', (req, res) => {
-    const signUpPage = path.join(__dirname, '/html/Login_Sign_Up.html');
+    const signUpPage = path.join(__dirname, '/html/home.html');
     console.log(req.url)
     res.setHeader('Content-Type', 'text/html');
     fs.readFile(signUpPage, (err, data) => {
@@ -75,6 +75,20 @@ app.get('/user', (req, res) => {
             res.status(500).send('Server error');
         } else {
             console.log("done");
+            res.end(data);
+        }
+    });
+});
+
+app.get('/Login_SignUp', (req, res) => {
+    const signUpPage = path.join(__dirname, '/html/Login_Sign_Up.html');
+    console.log(req.url)
+    res.setHeader('Content-Type', 'text/html');
+    fs.readFile(signUpPage, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Server error');
+        } else {
             res.end(data);
         }
     });
