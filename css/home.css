@@ -1,10 +1,11 @@
 *{
      margin: 0;
      padding: 0;
+     transition: all 0.4s ease-in-out;
 }
-/* body{
+body{
      overflow: hidden;
-} */
+}
 .navigation{
      position: fixed;
      z-index: 100;
@@ -39,35 +40,126 @@
      font-weight: bold;
      font-size: 20pt;
      border-radius: 20px;
+     font-family: Calibri;
+}
+.menu a:hover{
+     color: white;
 }
 .container{
-     width: 300%;
+     width: 100%;
      overflow: hidden;
+     position: relative;
+}
+.slider{
+     width: 300%;
      display: flex;
      align-items: center;
      justify-content: center;
+     transition: all 1s ease-in-out;
 }
-.pic1{
+.slide p{
+     color: #B28E6E;
+     font-size: 72pt;
+     margin-top: 13vw;
+     font-weight: bold;
+     font-family: Candara;
+     position: absolute;
+     display: block;
+     z-index: 98;
+}
+.show p{
+     animation: appear 2s ease-in-out normal both;
+     transition: 0.4s ease-in-out;
+}
+.remove p{
+     animation: disappear 2s ease-in-out normal both;
+     transition: 0.4s ease-in-out;
+}
+#pic1{
      width: 100vw;
      height: 70vh;
      background-image: url("../pics/home1.jpg");
      background-size: cover;
      background-position: center;
      padding: 10vw;
+     flex-basis: 100%;
 }
-.pic2{
+#pic2{
      width: 100vw;
      height: 70vh;
      background-image: url("../pics/home2.jpg");
      background-size: cover;
      background-position: center;
      padding: 10vw;
+     flex-basis: 100%;
 }
-.pic3{
+#pic3{
      width: 100vw;
      height: 70vh;
      background-image: url("../pics/home3.jpg");
      background-size: cover;
      background-position: center;
      padding: 10vw;
+     flex-basis: 100%;
+}
+.arrows{
+     top: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     position: absolute;
+     z-index: 100;
+     padding: 0 2vw 0 2vw;
+     width: 95vw;
+}
+.left{
+     height: 100px;
+     width: 30px;
+     cursor: pointer;
+}
+.right{
+     height: 100px;
+     width: 30px;
+     cursor: pointer;
+}
+.fixed{
+     position: fixed;
+     z-index: 99;
+     top: 60%;
+     padding: 5vh 10vw 2vh 10vw;
+     color: white;
+}
+.fixed p{
+     font-size: 32pt;
+     font-family: Candara;
+     margin-bottom: 5vh;
+}
+.fixed a{
+     text-decoration: none;
+     color: black;
+     font-size: 28pt;
+     font-weight: bold;
+     background-color: #986247;
+     padding: 2% 5%;
+     border-radius: 30px;
+     font-family: Noto Sans;
+}
+.fixed a:hover{
+     color: white;
+}
+@keyframes appear{
+     from{
+          color:#53382900;
+     }
+     to{
+          color: #B28E6E;
+     }
+}
+@keyframes disappear{
+     from{
+          color: #B28E6E;  
+     }
+     to{
+          color: #B28E6E; 
+     }
 }
