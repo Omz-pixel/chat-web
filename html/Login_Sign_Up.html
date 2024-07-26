@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login and Signup</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body id="body_background">
     <div class="container" id="container">
@@ -16,9 +16,9 @@
                     <form id="login-form" class="form" action="http://localhost:9000/check-user" method="post">
                         <h2>Login to your account</h2>
                         <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" placeholder="Enter your username">
+                        <input type="text" id="username" name="uname" placeholder="Enter your username">
                         <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password">
+                        <input type="password" id="pass" name="pass" placeholder="Enter your password">
                         <button>SUBMIT</button>
                         <p>If you have no account, <a href="#" id="signup-link" onclick="sign_up(event)">sign up here</a></p>
                     </form>
@@ -32,10 +32,10 @@
                         <div class="left">
                             <label for="email">Email:</label><br>
                             <input type="email" id="email" name="email" placeholder="Enter your email"><br>
-                            <label for="username-signup">Username:</label><br>
-                            <input type="text" id="username-signup" name="username-signup" placeholder="Enter your username"><br>
-                            <label for="password-signup">Password:</label><br>
-                            <input type="password" id="password-signup" name="password-signup" placeholder="Enter your password"><br>
+                            <label for="username">Username:</label><br>
+                            <input type="text" id="username" name="username" placeholder="Enter your username"><br>
+                            <label for="password">Password:</label><br>
+                            <input type="password" id="password" name="password" placeholder="Enter your password"><br>
                         </div>
                         <div class="right">
                             <label for="confirm-password">Confirm your Password:</label>
@@ -54,6 +54,6 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>
