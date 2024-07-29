@@ -18,7 +18,8 @@
     </form>
 
     <script>
-        var uname = "";
+        const urlParams = new URLSearchParams(window.location.search)
+        const uname = urlParams.get("username");
         var online_users = [];
         var n = 0;
         var found = false;
@@ -41,6 +42,7 @@
             console.log("something");
             if(uname == ""){
                 uname = data;
+                console.log(uname)
                 socket.emit('uname', uname);
             }
             console.log(uname)

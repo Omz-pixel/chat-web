@@ -14,6 +14,7 @@ const io = socketIO(server);
 let onlineID = [];
 let online = [];
 let n = 0;
+let id = 0;
 
 app.use(express.static(__dirname));
 
@@ -161,16 +162,16 @@ app.get('/Login_SignUp', (req, res) => {
 
 // For messaging
 io.on('connection', (socket) => {
-    // io.emit('given', users);
-    // online[n] = users;
-    onlineID[n] = socket.id;
+    // io.emit('given', online[n]);
+    // // online[n] = users;
+    onlineID[id] = socket.id;
+    id++;
 
-    for (var i = 0; i <= n; i++) {
+    for (var i = 0; i<n; i++) {
         console.log("Online: ", online[i]);
         io.emit('online', online[i]);
     }
 
-    n++;
 
     console.log("A new user connected!!  ", socket.id);
 

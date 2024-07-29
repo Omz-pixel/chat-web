@@ -10,5 +10,12 @@
         "username": "exampleMan",
         "password": "12345",
         "loggedIn": true
+    },
+    {
+        "email": "dkd@kjdd",
+        "username": "dodo",
+        "password": "123",
+        "terms": "on",
+        "loggedIn": true
     }
 ]
