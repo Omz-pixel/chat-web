@@ -4,12 +4,13 @@ const path = require('path');
 const http = require('http');
 const { URLSearchParams } = require('url');
 const socketIO = require('socket.io');
+const session = require('express-session');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-let users;
+// let users;
 let onlineID = [];
 let online = [];
 let n = 0;
@@ -19,13 +20,22 @@ app.use(express.static(__dirname));
 // To get form data
 app.use(express.urlencoded({ extended: true }));
 
+// Use session middleware
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Set secure: true if using HTTPS
+}));
+
 // Handling sign-up form
 app.post('/new-user', (req, res) => {
     console.log(req.body);
     const user_info = req.body;
     user_info.loggedIn = true;
     delete user_info.confirm;
-    users = user_info.username;
+    online[n] = user_info.username;
+    n++;
     const filePath = path.join(__dirname, 'users.json');
     fs.readFile(filePath, (err, data) => {
         if (err) {
@@ -39,67 +49,72 @@ app.post('/new-user', (req, res) => {
                 return res.status(500).json({ message: 'Failed to write file' });
             }
             console.log('User created successfully');
-            // const urlUser = user_info.username;
+            req.session.username = user_info.username; // Set session username
             res.redirect(`/user?username=${encodeURIComponent(user_info.username)}`);
             res.end();
         });
     });
 });
 
-
 // Handling login request
 app.post('/login', (req, res) => {
     const info = req.body;
     const userDirectory = path.join(__dirname, 'users.json');
     fs.readFile(userDirectory, (err, data) => {
-        const users = JSON.parse(data);
-        for(var i=0; i<users.length; i++){
-            if(users[i].username == info.uname){
-                if(users[i].password == info.pass){
-                    users = info.uname;
-                    res.redirect(`/user?username=${encodeURIComponent(info.uname)}`);
-                    res.end();
-                    break;
-                }
-                else{
-                    res.redirect('/incorrect')
-                    res.end();
-                    break;
+        if (err) {
+            console.log(err);
+            return res.status(500).send('Server error');
+        }
+        const Users = JSON.parse(data);
+        let found = false;
+        for (let i = 0; i < Users.length; i++) {
+            if (Users[i].username == info.uname) {
+                if (Users[i].password == info.pass) {
+                    online[n] = info.uname;
+                    n++;
+                    req.session.username = info.uname; // Set session username
+                    found = true;
+                    return res.redirect(`/user?username=${encodeURIComponent(info.uname)}`);
+                } else {
+                    return res.redirect('/incorrect');
                 }
             }
-            
         }
-        res.redirect('/not-found') 
-        console.log(users)
-        console.log(info);
-        res.end();
-        
-    })
-})
+        if (!found) return res.redirect('/not-found');
+    });
+});
+
+// Middleware to check if user is logged in
+function checkAuthenticated(req, res, next) {
+    if (req.session.username) {
+        next();
+    } else {
+        res.redirect('/Login_SignUp');
+    }
+}
 
 app.get('/incorrect', (req, res) => {
     const resFile = path.join(__dirname, '/html/IncorrectPass.html');
     res.setHeader('Content-Type', 'text/html');
     fs.readFile(resFile, (err, data) => {
-        if(err) console.log(err);
+        if (err) console.log(err);
         else res.end(data);
-    })
-})
+    });
+});
 
 app.get('/not-found', (req, res) => {
     const resFile = path.join(__dirname, '/html/userNotfound.html');
     res.setHeader('Content-Type', 'text/html');
     fs.readFile(resFile, (err, data) => {
-        if(err) console.log(err);
+        if (err) console.log(err);
         else res.end(data);
-    })
-})
-
+    });
+});
 
 // Serving the home page
 app.get('/', (req, res) => {
     const signUpPage = path.join(__dirname, '/html/home.html');
-    console.log(req.url)
+    console.log(req.url);
     res.setHeader('Content-Type', 'text/html');
     fs.readFile(signUpPage, (err, data) => {
         if (err) {
@@ -111,15 +126,11 @@ app.get('/', (req, res) => {
     });
 });
 
-
-// Serving the chat page
-app.get('/user', (req, res) => {
-    const parameter = new URLSearchParams(req.url);
-    const user = parameter.get('username');
+// Serving the chat page (authenticated)
+app.get('/user', checkAuthenticated, (req, res) => {
     const chatPage = path.join(__dirname, '/html/chat.html');
-    users = user;
-    console.log(req.url)
-    console.log(users);
+    console.log(req.url);
+    console.log(req.session.username); // Use session username
     res.setHeader('Content-Type', 'text/html');
 
     fs.readFile(chatPage, (err, data) => {
@@ -133,11 +144,10 @@ app.get('/user', (req, res) => {
     });
 });
 
-
 // Redirect to login page
 app.get('/Login_SignUp', (req, res) => {
     const signUpPage = path.join(__dirname, '/html/Login_Sign_Up.html');
-    console.log(req.url)
+    console.log(req.url);
     res.setHeader('Content-Type', 'text/html');
     fs.readFile(signUpPage, (err, data) => {
         if (err) {
@@ -151,10 +161,9 @@ app.get('/Login_SignUp', (req, res) => {
 
 // For messaging
 io.on('connection', (socket) => {
-    io.emit('given', users);
-    online[n] = users;
+    // io.emit('given', users);
+    // online[n] = users;
     onlineID[n] = socket.id;
-
 
     for (var i = 0; i <= n; i++) {
         console.log("Online: ", online[i]);

@@ -1,8 +1,12 @@
+
 const body = document.getElementById('body_background');
 const background = document.getElementById('background');
 const container = document.querySelector('.container');
 const logForm = document.getElementById('log-form');
 const log2Form = document.getElementById('log2-form');
+const forgotDiv = document.getElementById('forgot-div');
+const closeBtn = document.getElementById('close-btn');
+const signupLink = document.getElementById('signup-link');
 const fixedBackground = 'url("../pics/signUp_blur.png")';
 
 let backgroundInterval;
@@ -51,6 +55,7 @@ function sign_up(event) {
     container.style.width = "auto";
     container.style.height = "auto";
     container.style.padding = "2%";
+    forgotDiv.style.display = 'none';
 }
 
 function log_in(event) {
@@ -60,7 +65,6 @@ function log_in(event) {
 
     background.classList.remove('hidden');
     background.classList.add('visible');
-    
 
     log2Form.classList.remove('visible');
     log2Form.classList.add('hidden');
@@ -69,8 +73,29 @@ function log_in(event) {
     container.style.width = "80vw";
     container.style.height = "600px";
     container.style.padding = "14px";
+    forgotDiv.style.display = 'none';
+    forgotDiv.style.width = '80%';
+    forgotDiv.style.marginLeft = '-10.3vw'
 }
 
-function go_back(){
+function go_back() {
     window.history.back();
+}
+
+logForm.addEventListener('mouseover', () => {
+    forgotDiv.style.display = 'block';
+});
+
+
+forgotDiv.addEventListener('mouseleave', () => {
+    forgotDiv.style.display = 'none';
+});
+
+closeBtn.addEventListener('click', () => {
+    forgotDiv.style.display = 'none';
+    console.log("ok!")
+})
+
+function forgot_pass(){
+    window.location.assign("http://localhost:9000/forgot-pass")
 }

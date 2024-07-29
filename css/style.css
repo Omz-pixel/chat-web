@@ -247,3 +247,47 @@ p.bottom{
     cursor: pointer;
 }
 
+.forgot-div {
+    display: none;
+    position: absolute;
+    /* bottom: -10px; */
+    left: 12.3vw;
+    /* right: 0; */
+    margin: auto;
+    background-color: #E7D9CF;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    margin-top: -20px;
+}
+
+.forgot-div p {
+    margin: 10px 0;
+}
+
+.forgot-div button {
+    padding: 5px 10px;
+    background-color: #333F50;
+    color: #fff;
+    border: 2px solid #172231;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.forgot-div button:hover{
+    background-color: #0056b3;
+}
+
+.forgot-div button.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333F50;
+}
