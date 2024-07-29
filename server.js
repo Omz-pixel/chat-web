@@ -24,6 +24,7 @@ app.post('/new-user', (req, res) => {
     console.log(req.body);
     const user_info = req.body;
     user_info.loggedIn = true;
+    delete user_info.confirm;
     users = user_info.username;
     const filePath = path.join(__dirname, 'users.json');
     fs.readFile(filePath, (err, data) => {
@@ -38,13 +39,64 @@ app.post('/new-user', (req, res) => {
                 return res.status(500).json({ message: 'Failed to write file' });
             }
             console.log('User created successfully');
-            const urlUser = user_info.username;
+            // const urlUser = user_info.username;
             res.redirect(`/user?username=${encodeURIComponent(user_info.username)}`);
+            res.end();
         });
     });
 });
 
-// Serving the sign-up page
+
+// Handling login request
+app.post('/login', (req, res) => {
+    const info = req.body;
+    const userDirectory = path.join(__dirname, 'users.json');
+    fs.readFile(userDirectory, (err, data) => {
+        const users = JSON.parse(data);
+        for(var i=0; i<users.length; i++){
+            if(users[i].username == info.uname){
+                if(users[i].password == info.pass){
+                    users = info.uname;
+                    res.redirect(`/user?username=${encodeURIComponent(info.uname)}`);
+                    res.end();
+                    break;
+                }
+                else{
+                    res.redirect('/incorrect')
+                    res.end();
+                    break;
+                }
+            }
+            
+        }
+        res.redirect('/not-found') 
+        console.log(users)
+        console.log(info);
+        res.end();
+        
+    })
+})
+
+app.get('/incorrect', (req, res) => {
+    const resFile = path.join(__dirname, '/html/IncorrectPass.html');
+    res.setHeader('Content-Type', 'text/html');
+    fs.readFile(resFile, (err, data) => {
+        if(err) console.log(err);
+        else res.end(data);
+    })
+})
+
+app.get('/not-found', (req, res) => {
+    const resFile = path.join(__dirname, '/html/userNotfound.html');
+    res.setHeader('Content-Type', 'text/html');
+    fs.readFile(resFile, (err, data) => {
+        if(err) console.log(err);
+        else res.end(data);
+    })
+})
+
+
+// Serving the home page
 app.get('/', (req, res) => {
     const signUpPage = path.join(__dirname, '/html/home.html');
     console.log(req.url)
@@ -59,12 +111,13 @@ app.get('/', (req, res) => {
     });
 });
 
+
 // Serving the chat page
 app.get('/user', (req, res) => {
-    // const parameter = new URLSearchParams(req.url);
-    // const user = parameter.get('username');
+    const parameter = new URLSearchParams(req.url);
+    const user = parameter.get('username');
     const chatPage = path.join(__dirname, '/html/chat.html');
-    // users = user;
+    users = user;
     console.log(req.url)
     console.log(users);
     res.setHeader('Content-Type', 'text/html');
@@ -80,6 +133,8 @@ app.get('/user', (req, res) => {
     });
 });
 
+
+// Redirect to login page
 app.get('/Login_SignUp', (req, res) => {
     const signUpPage = path.join(__dirname, '/html/Login_Sign_Up.html');
     console.log(req.url)
@@ -99,6 +154,7 @@ io.on('connection', (socket) => {
     io.emit('given', users);
     online[n] = users;
     onlineID[n] = socket.id;
+
 
     for (var i = 0; i <= n; i++) {
         console.log("Online: ", online[i]);

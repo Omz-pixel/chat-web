@@ -60,13 +60,17 @@ function log_in(event) {
 
     background.classList.remove('hidden');
     background.classList.add('visible');
-    background.style.backgroundImage = backgrounds[currentBackgroundIndex];
+    
 
     log2Form.classList.remove('visible');
     log2Form.classList.add('hidden');
     logForm.classList.remove('hidden');
     logForm.classList.add('visible');
     container.style.width = "80vw";
-    container.style.height = "500px";
-    container.style.padding = "0";
+    container.style.height = "600px";
+    container.style.padding = "14px";
+}
+
+function go_back(){
+    window.history.back();
 }

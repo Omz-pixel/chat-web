@@ -38,9 +38,10 @@ body{
      padding: 2% 5%;
      color: black;
      font-weight: bold;
-     font-size: 20pt;
+     font-size: 16pt;
      border-radius: 20px;
      font-family: Calibri;
+     border: 3px solid #986247;
 }
 .menu a:hover{
      color: white;
@@ -139,10 +140,12 @@ body{
      color: black;
      font-size: 28pt;
      font-weight: bold;
-     background-color: #986247;
+     background-color: #A47352;
      padding: 2% 5%;
      border-radius: 30px;
-     font-family: Noto Sans;
+     font-family: Calibri;
+     border: 5px solid #7c513c;
+
 }
 .fixed a:hover{
      color: white;

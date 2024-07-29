@@ -8,25 +8,26 @@
 </head>
 <body id="body_background">
     <div class="container" id="container">
-        <div class="background" id="background"></div>
+        <div class="background" id="background"><img src="../pics/backIcon_thickCircle.png" onclick="go_back()"></div>
         <div class="form-container" id="form-container">
             <!-- <div class="login"> -->
                 
                 <div class="log" id="log-form">
-                    <form id="login-form" class="form" action="http://localhost:9000/check-user" method="post">
+                    <form id="login-form" class="form" action="http://localhost:9000/login" method="post">
                         <h2>Login to your account</h2>
                         <label for="username">Username:</label>
                         <input type="text" id="username" name="uname" placeholder="Enter your username">
                         <label for="password">Password:</label>
                         <input type="password" id="pass" name="pass" placeholder="Enter your password">
                         <button>SUBMIT</button>
-                        <p>If you have no account, <a href="#" id="signup-link" onclick="sign_up(event)">sign up here</a></p>
+                        <p style="font-size: 11pt; margin: auto; margin-top: 14px;">If you have no account, <a href="#" id="signup-link" onclick="sign_up(event)">sign up here</a></p>
                     </form>
                 </div>
             <!-- </div> -->
             <div class="log2 hidden" id="log2-form">
                 <!-- <center> -->
                 <form id="signup-form" class="form2" action="http://localhost:9000/new-user" method="post">
+                    <img src="../pics/back_icon.png" onclick="log_in(event)">
                     <center><h2><u>Create your account</u></h2></center>
                     <div class="move_center">
                         <div class="left">
@@ -38,8 +39,8 @@
                             <input type="password" id="password" name="password" placeholder="Enter your password"><br>
                         </div>
                         <div class="right">
-                            <label for="confirm-password">Confirm your Password:</label>
-                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
+                            <label for="confirm">Confirm your Password:</label>
+                            <input type="password" id="confirm" name="confirm" placeholder="Confirm your password">
                             <label>
                                 <input type="checkbox" name="terms"> Click this if you've read the <a href="#">terms and agreements</a>
                             </label>

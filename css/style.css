@@ -25,23 +25,42 @@ a:hover {
 .container {
     position: relative;
     width: 80vw;
-    height: 500px;
+    height: 600px;
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
     display: flex;
     background-color: #1a426d00;
     transition: width 1s ease-in-out;
+    padding: 14px;
 }
 
 .background {
-    width: 53%;
-    height: 100%;
+    width: 50%;
+    height: 500px;
+    margin-top: 9vh;
     background-image: url('../pics/pic1.jpeg');
     background-size: cover;
     background-position: center;
     transition: background-image 1s ease-in-out;
     border-radius: 40px;
+    /* padding: 10px; */
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.596);
+    /* border: 2px solid black; */
+}
+
+.background img{
+    width: 7.4%;
+    height: 7.7%;
+    margin-top: 2.5vh;
+    margin-left: 1.5vw;
+
+    /* top: 2;
+    left: 2; */
+}
+
+.background img:hover{
+    cursor: pointer;
 }
 
 .form-container {
@@ -88,7 +107,7 @@ p.bottom{
 
 .form2 p{
     margin-top: 8vh;
-    margin-left: 10vw;
+    margin-left: 0;
 }
 
 .form2 h2 {
@@ -132,17 +151,20 @@ p.bottom{
     margin: auto;
     border-radius: 35px;
     display: flex;
-    padding: 20px;
+    padding: 30px;
     flex-direction: column;
     background-color: #E7D9CF;
     /* align-items: center; */
     font-family: Candara;
     width: 100%;
-    max-width: 323px;
+    max-width: 270px;
+    max-height: 340px;
 }
 
 .form h2 {
+    margin: auto;
     margin-bottom: 20px;
+    /* margin: auto; */
 }
 
 .form label {
@@ -155,6 +177,7 @@ p.bottom{
     margin-bottom: 15px;
     border: 2px solid #283a52;
     border-radius: 5px;
+    width: 80%;
 }
 
 .form button {
@@ -162,9 +185,11 @@ p.bottom{
     background: #333F50;
     color: #fff;
     border: 2px solid #172231;
-    border-radius: 5px;
+    border-radius: 50px;
     transition: 1s ease;
     cursor: pointer;
+    margin: auto;
+    width: 100px;
 }
 
 .form button:hover {
@@ -177,13 +202,13 @@ p.bottom{
     opacity: 0;
     position: absolute;
     top: 0;
-    transition: transform 1s ease, opacity 1s ease;
+    transition: 1s ease;
 }
 
 .visible {
     transform: translateX(0);
     opacity: 1;
-    transition: transform 1s ease, opacity 1s ease;
+    transition: 1s ease;
 }
 
 .log {
@@ -196,7 +221,7 @@ p.bottom{
     border: 10px solid #E7D9CF;
     border-radius: 40px;
     width: auto;
-    max-width: 365px;
+    max-width: 330px;
 }
 
 .log2 {
@@ -210,3 +235,15 @@ p.bottom{
     width: 90vw;
     height: auto;
 }
+
+.log2 img{
+    width: 5%;
+    height: 5%;
+    top: 0;
+    left: 0;
+}
+
+.log2 img:hover{
+    cursor: pointer;
+}
+
