@@ -18,98 +18,66 @@
     </form>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search)
+        const urlParams = new URLSearchParams(window.location.search);
         const uname = urlParams.get("username");
         var online_users = [];
-        var n = 0;
         var found = false;
-
-
-        let sending;
-        
+    
         document.getElementById("uname").textContent = uname;
-
-        // const socket = io('http://192.168.100.206:9000');
-        const socket = io('http://localhost:9000');
+    
+        // const socket = io('http://localhost:9000');
+        const socket = io('http://192.168.100.221:9000');
         let display = document.getElementById("display");
-        let online = document.getElementById("users")
-
+        let online = document.getElementById("users");
+    
         socket.on('connect', () => {
             console.log("Successfully connected to the server. ", uname);
         });
-
-        socket.on('given', (data) => {
-            console.log("something");
-            if(uname == ""){
-                uname = data;
-                console.log(uname)
-                socket.emit('uname', uname);
-            }
-            console.log(uname)
-        })
-            
-
-        
-
-        socket.on('online', (users) => {
-            if(uname == users) found = true;
-            for(let i=0; i<online_users.length; i++){
-                if(online_users[i] == users){
-                    found = true;
-                }
-            }
-            
-
-            if(!found){
-                online_users.push(users);
-                
+    
+        socket.on('online-users', (users) => {
+            online_users = users;
+            online.innerHTML = '';
+            online_users.forEach(user => {
                 const option = document.createElement("option");
-                option.value = users;
-                option.id = users.toLocaleLowerCase();
-                option.textContent = users.toUpperCase();
-
+                option.value = user;
+                option.id = user.toLowerCase();
+                option.textContent = user.toUpperCase();
                 online.append(option);
-            }else{
-                console.log("User already online/back online: ", users);
-                found = false;
-            }
+            });
         });
-
+    
         socket.on('new_mssg', (data) => {
             const { sender, receiver, mssg } = data;
-            if(uname.toLocaleLowerCase() == receiver || uname.toLocaleLowerCase() == sender){
+            if (uname.toLowerCase() === receiver || uname.toLowerCase() === sender) {
                 console.log("Message received.", mssg);
                 display.innerHTML += `<b> ${mssg} </b><br><br>`;
-            }else console.log("Message blocked!!");
+            } else {
+                console.log("Message blocked!!");
+            }
         });
-
-        function send(){
+    
+        function send() {
             let mssg = document.getElementById("mssg").value;
-            sending = uname.toLowerCase() + "-> " + mssg;
+            const sending = `${uname.toLowerCase()}-> ${mssg}`;
             const data = {
                 "sender": uname.toLowerCase(),
                 "receiver": online.value.toLowerCase(),
                 "mssg": sending
-            }
+            };
             console.log("It works: ", mssg);
             socket.emit('send_mssg', data);
-            
-            mssg = "dd"
+    
             event.preventDefault();
         }
-
+    
         socket.on("bye", (data) => {
-            for (let z=0; z<online.children.length; z++) {
-                if(data == online.children[z].value){
-                    delete online.children[z];
-                    console.log("User: ", data, "deleted succesfully")
-                }
-                console.log(online.children[0].value);
-                
+            const userOption = document.getElementById(data.toLowerCase());
+            if (userOption) {
+                userOption.remove();
+                console.log("User: ", data, "deleted successfully");
             }
-            
-            
-        })
+        });
     </script>
+    
 </body>
 </html>

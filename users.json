@@ -17,5 +17,11 @@
         "password": "123",
         "terms": "on",
         "loggedIn": true
+    },
+    {
+        "email": "gmaph001@gmail.com",
+        "username": "gmaph__001",
+        "password": "SRSS14552",
+        "loggedIn": true
     }
 ]
