@@ -3,6 +3,15 @@ let rightbtn = document.querySelector('.right');
 let slide = document.querySelector('.slider');
 let selectIndex = 0;
 
+// setInterval(()=>{
+//      selectIndex++;
+//      slide.style.transform = `translateX(-${selectIndex * 33.333}%)`;
+//      if(selectIndex == 2){
+//           selectIndex = -1;
+//      }
+// }, 5000);
+
+
 rightbtn.onclick =  function(){
      slide.classList.remove('show');
      selectIndex = (selectIndex<2) ? selectIndex + 1 : 2;
