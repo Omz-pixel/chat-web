@@ -85,6 +85,15 @@ app.post('/login', (req, res) => {
     });
 });
 
+// Middleware to check if user is logged in
+function checkAuthenticated(req, res, next) {
+    if (req.session.username) {
+        next();
+    } else {
+        res.redirect('/Login_SignUp');
+    }
+}
+
 app.get('/incorrect', (req, res) => {
     const resFile = path.join(__dirname, '/html/IncorrectPass.html');
     res.setHeader('Content-Type', 'text/html');
@@ -117,16 +126,6 @@ app.get('/', (req, res) => {
         }
     });
 });
-
-
-// Middleware to check if user is logged in
-function checkAuthenticated(req, res, next) {
-    if (req.session.username) {
-        next();
-    } else {
-        res.redirect('/Login_SignUp');
-    }
-}
 
 // Serving the chat page (authenticated)
 app.get('/user', checkAuthenticated, (req, res) => {
@@ -163,9 +162,16 @@ app.get('/Login_SignUp', (req, res) => {
 
 // For messaging
 io.on('connection', (socket) => {
-    onlineID.push(socket.id);
+    // io.emit('given', online[n]);
+    // // online[n] = users;
+    onlineID[id] = socket.id;
+    id++;
 
-    socket.emit('online-users', online);
+    for (var i = 0; i<n; i++) {
+        console.log("Online: ", online[i]);
+        io.emit('online', online[i]);
+    }
+
 
     console.log("A new user connected!!  ", socket.id);
 
@@ -179,27 +185,21 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log("The user decided to leave! :(", socket.id);
-        let username;
-        onlineID = onlineID.filter((id, index) => {
-            if (id === socket.id) {
-                username = online[index];
-                return false;
+        var many = 0;
+        for (var x = 0; x <= n; x++) {
+            if (onlineID[x] == socket.id) {
+                io.emit("bye", online[x]);
+                console.log("Deleted: ", online[x]);
+                delete online[x];
+                delete onlineID[x];
+                many++;
             }
-            return true;
-        });
-        online = online.filter(user => user !== username);
-        console.log("Deleted: ", username);
-
-        // Notify all clients about the user disconnection
-        io.emit("bye", username);
-        io.emit("online-users", online);
+        }
+        n -= many;
     });
 });
 
-
 server.listen(9000, '0.0.0.0', () => {
-    // console.log("Server running on http://localhost:9000");
-    // console.log("Server running on http://192.168.100.221:9000");
-    console.log("Server running on http://192.168.100.198:9000");
+    console.log("Server running on http://localhost:9000");
     console.log("\nListening for new clients...\n");
 });
