@@ -55,6 +55,8 @@ function sign_up(event) {
     container.style.width = "auto";
     container.style.height = "auto";
     container.style.padding = "2%";
+    forgotDiv.style.transform = 'translateX(100%)';
+    forgotDiv.style.opacity = '0';
     forgotDiv.style.display = 'none';
 }
 
@@ -73,9 +75,7 @@ function log_in(event) {
     container.style.width = "80vw";
     container.style.height = "600px";
     container.style.padding = "14px";
-    forgotDiv.style.display = 'none';
-    forgotDiv.style.width = '80%';
-    forgotDiv.style.marginLeft = '-10.3vw'
+    forgotDiv.style.display = 'block'
 }
 
 function go_back() {
@@ -83,16 +83,19 @@ function go_back() {
 }
 
 logForm.addEventListener('mouseover', () => {
-    forgotDiv.style.display = 'block';
+    forgotDiv.style.transform = 'translateX(0)';
+    forgotDiv.style.opacity = '1';
 });
 
 
 forgotDiv.addEventListener('mouseleave', () => {
-    forgotDiv.style.display = 'none';
+    forgotDiv.style.transform = 'translateX(100%)';
+    forgotDiv.style.opacity = '0';
 });
 
 closeBtn.addEventListener('click', () => {
-    forgotDiv.style.display = 'none';
+    forgotDiv.style.transform = 'translateX(100%)';
+    forgotDiv.style.opacity = '0';
     console.log("ok!")
 })
 
