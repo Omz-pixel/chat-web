@@ -83,7 +83,7 @@ function go_back() {
 }
 
 logForm.addEventListener('mouseover', () => {
-    forgotDiv.style.transform = 'translateX(0)';
+    forgotDiv.style.transform = 'translateX(-32%)';
     forgotDiv.style.opacity = '1';
 });
 
