@@ -23,5 +23,17 @@
         "username": "gmaph__001",
         "password": "SRSS14552",
         "loggedIn": true
+    },
+    {
+        "email": "newguy@gmail.com",
+        "username": "newguy",
+        "password": "qwerty",
+        "loggedIn": true
+    },
+    {
+        "email": "2/10@gmail.com",
+        "username": "bro_bones",
+        "password": "templerun",
+        "loggedIn": true
     }
 ]

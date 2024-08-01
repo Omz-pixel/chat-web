@@ -14,7 +14,7 @@ const io = socketIO(server);
 let onlineID = [];
 let online = [];
 let n = 0;
-let id = 0;
+// let id = 0;
 
 app.use(express.static(__dirname));
 
@@ -85,15 +85,6 @@ app.post('/login', (req, res) => {
     });
 });
 
-// Middleware to check if user is logged in
-function checkAuthenticated(req, res, next) {
-    if (req.session.username) {
-        next();
-    } else {
-        res.redirect('/Login_SignUp');
-    }
-}
-
 app.get('/incorrect', (req, res) => {
     const resFile = path.join(__dirname, '/html/IncorrectPass.html');
     res.setHeader('Content-Type', 'text/html');
@@ -126,6 +117,16 @@ app.get('/', (req, res) => {
         }
     });
 });
+
+
+// Middleware to check if user is logged in
+function checkAuthenticated(req, res, next) {
+    if (req.session.username) {
+        next();
+    } else {
+        res.redirect('/Login_SignUp');
+    }
+}
 
 // Serving the chat page (authenticated)
 app.get('/user', checkAuthenticated, (req, res) => {
@@ -162,18 +163,16 @@ app.get('/Login_SignUp', (req, res) => {
 
 // For messaging
 io.on('connection', (socket) => {
-    // io.emit('given', online[n]);
-    // // online[n] = users;
-    onlineID[id] = socket.id;
-    id++;
-
-    for (var i = 0; i<n; i++) {
-        console.log("Online: ", online[i]);
-        io.emit('online', online[i]);
+    // Add the connected user to the onlineID and online lists
+    onlineID.push(socket.id);
+    if (socket.request.session && socket.request.session.username) {
+        online.push(socket.request.session.username);
     }
-
-
+    
+    // Notify all clients about the new user connection
+    io.emit('online_users', online);
     console.log("A new user connected!!  ", socket.id);
+    console.log("Online: \t", online);
 
     socket.on('send_mssg', (data) => {
         const { sender, receiver, mssg } = data;
@@ -185,21 +184,27 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log("The user decided to leave! :(", socket.id);
-        var many = 0;
-        for (var x = 0; x <= n; x++) {
-            if (onlineID[x] == socket.id) {
-                io.emit("bye", online[x]);
-                console.log("Deleted: ", online[x]);
-                delete online[x];
-                delete onlineID[x];
-                many++;
+        let username;
+        onlineID = onlineID.filter((id, index) => {
+            if (id === socket.id) {
+                username = online[index];
+                return false;
             }
-        }
-        n -= many;
+            return true;
+        });
+        online = online.filter(user => user !== username);
+        console.log("Deleted: ", username);
+
+        // Notify all clients about the user disconnection
+        io.emit("online_users", online);
+        console.log("Online: \t", online);
     });
 });
 
+
+
 server.listen(9000, '0.0.0.0', () => {
     console.log("Server running on http://localhost:9000");
+    // console.log("Server running on http://192.168.100.221:9000");
     console.log("\nListening for new clients...\n");
 });
