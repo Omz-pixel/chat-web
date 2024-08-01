@@ -20,10 +20,6 @@
                     <button>SUBMIT</button>
                     <p style="font-size: 11pt; margin: auto; margin-top: 14px;">If you have no account, <a href="#" id="signup-link" onclick="sign_up(event)">sign up here</a></p>
                 </form>
-                <div class="forgot-div" id="forgot-div">
-                    <p>Forgot your username or password?</p>
-                    <button onclick="forgot_pass()">YES</button>
-                </div>
             </div>
             <div class="log2 hidden" id="log2-form">
                 <form id="signup-form" class="form2" action="/new-user" method="post">
@@ -51,6 +47,11 @@
                         <p class="bottom"><b>If you already have an account, <a href="#" id="login-link" onclick="log_in(event)">login here</a></b></p>
                     </center>
                 </form>
+            </div>
+            <div class="forgot-div" id="forgot-div">
+                <button id="close-btn" class="close">&times;</button><br>
+                <p>Forgot your username or password?</p>
+                <button onclick="forgot_pass()">YES</button>
             </div>
         </div>
     </div>
