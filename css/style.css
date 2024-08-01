@@ -51,7 +51,7 @@ a:hover {
 
 .background img{
     width: 7.4%;
-    height: 7.7%;
+    height: 8%;
     margin-top: 2.5vh;
     margin-left: 1.5vw;
 
@@ -248,12 +248,13 @@ p.bottom{
 }
 
 .forgot-div {
-    display: none;
+    transform: translateX(100%);
+    opacity: 0;
     position: absolute;
-    /* bottom: -10px; */
-    left: 12.3vw;
-    /* right: 0; */
-    margin: auto;
+    bottom: 0;
+    /* left: 12.3vw; */
+    right: 0;
+    /* margin: auto; */
     background-color: #E7D9CF;
     padding: 10px;
     border-radius: 10px;
@@ -262,6 +263,7 @@ p.bottom{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 10;
     margin-top: -20px;
+    transition: 0.6s ease-in;
 }
 
 .forgot-div p {
@@ -275,6 +277,7 @@ p.bottom{
     border: 2px solid #172231;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.7s ease;
 }
 
 .forgot-div button:hover{
