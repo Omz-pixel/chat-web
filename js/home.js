@@ -4,24 +4,25 @@ let slide = document.querySelector('.slider');
 let selectIndex = 0;
 
 setInterval(()=>{
-     selectIndex++;
-     slide.style.transform = `translateX(-${selectIndex * 33.333}%)`;
-     if(selectIndex == 2){
-          selectIndex = -1;
+     if(selectIndex<3){
+          slide.style.transform = "translate("+ selectIndex * -33.333 +"%)";
+          slide.classList.add('show');
+          selectIndex++;
+     }
+     else{
+          selectIndex = 0;
      }
 }, 5000);
-
-
-rightbtn.onclick =  function(){
-     slide.classList.remove('show');
-     selectIndex = (selectIndex<2) ? selectIndex + 1 : 2;
-     slide.style.transform = "translate("+ selectIndex * -33.333 +"%)";
-     slide.classList.add('show');
-}
 
 addEventListener('animationend', () => {
      slide.classList.remove('show');
 })
+
+rightbtn.onclick =  function(){
+     selectIndex = (selectIndex<2) ? selectIndex + 1 : 2;
+     slide.style.transform = "translate("+ selectIndex * -33.333 +"%)";
+     slide.classList.add('show');
+}
 
 leftbtn.onclick =  function(){
      selectIndex = (selectIndex>0) ? selectIndex - 1 : 0;
